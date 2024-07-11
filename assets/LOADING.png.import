@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgudcb2kr2ew8"
-path="res://.godot/imported/Lines - Horizontal - light dirt.png-02d16a074f9df3ff38dd2099a86856bc.ctex"
+uid="uid://b5acm6s2sbh8k"
+path="res://.godot/imported/LOADING.png-b3f5b0a0b412981bfdf5f24475532639.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Lines - Horizontal - light dirt.png"
-dest_files=["res://.godot/imported/Lines - Horizontal - light dirt.png-02d16a074f9df3ff38dd2099a86856bc.ctex"]
+source_file="res://assets/LOADING.png"
+dest_files=["res://.godot/imported/LOADING.png-b3f5b0a0b412981bfdf5f24475532639.ctex"]
 
 [params]
 

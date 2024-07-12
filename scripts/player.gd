@@ -25,6 +25,7 @@ extends CharacterBody2D
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var left: RayCast2D = $Left
 @onready var right: RayCast2D = $Right
+@onready var ledge_grab_ray: RayCast2D = $"Ledge grab"
 
 var in_air: bool = false
 var landing: bool = false
@@ -36,10 +37,8 @@ var looking_direction: int = -1
 func _physics_process(delta):
 	# Get input
 	var direction: float = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
-	print(direction)
 	
 	if is_on_floor():
-		print("on floor")
 		if in_air:
 			in_air = false
 			sprite.play("land")
@@ -78,35 +77,51 @@ func _physics_process(delta):
 	
 	# Not on floor
 	else:
-		print("in air")
 		in_air = true
+		running = false
 		
-		if is_on_wall():
+		if is_on_wall_only():
+			ledge_grab_ray.target_position.x = 20 * looking_direction
+			ledge_grab_ray.force_raycast_update()
+			if not ledge_grab_ray.is_colliding() and Input.is_action_just_pressed("jump"):
+				ledge_grab()
+				pass
+		
+		left.force_raycast_update()
+		if left.is_colliding():
+			looking_direction = 1
+			sprite.flip_h = true
 			if Input.is_action_just_pressed("jump"):
 				wall_jump()
-			
-			wall_sliding = true
-			
-			sprite.play("wall slide")
-			running = false
-			left.force_raycast_update()
-			if left.is_colliding():
-				sprite.flip_h = false
-			else:
-				right.force_raycast_update()
-				if right.is_colliding():
-					sprite.flip_h = true
-		
-		# if not on wall
-		else:
-			if wall_sliding:
 				wall_sliding = false
-				sprite.play("idle")
+			else:
+				wall_sliding = true
+				sprite.play("wall slide")
+		else:
+			right.force_raycast_update()
+			if right.is_colliding():
+				looking_direction = -1
+				sprite.flip_h = false
+				if Input.is_action_just_pressed("jump"):
+					wall_jump()
+					wall_sliding = false
+				else:
+					wall_sliding = true
+					sprite.play("wall slide")
+					
+			elif wall_sliding:
+				wall_sliding = false
+				sprite.play("jump")
+				sprite.frame = 4
+				
+									  # CAUTION, WARNING: TO BE CHANGED
+				
+				push_warning("player.gd, line 107: must change sprite.frame to the frame when the sprite has arms up in the air")
 				running = false
-			
-			if direction:
-				looking_direction = int(direction)
-				sprite.flip_h = true if looking_direction < 0 else false
+		
+		if direction:
+			looking_direction = int(direction)
+			sprite.flip_h = true if looking_direction > 0 else false
 		
 		if direction > 0:
 			velocity.x += clamp(direction * air_acceleration, 0, speed - velocity.x)
@@ -119,18 +134,24 @@ func _physics_process(delta):
 		
 		velocity += Vector2(0, gravity) * delta
 	
-	print("velocity: ", velocity)
 	move_and_slide()
 
 
 func jump():
-	print("jump")
 	velocity += Vector2(0, -sqrt(2 * gravity * jump_height))
 
 
 func wall_jump():
-	print("wall jump")
-	velocity = wall_jump_direction * looking_direction
+	velocity += wall_jump_direction * looking_direction
+
+
+func ledge_grab():
+	#ledge_grab_ray.target_position.x = 20 * looking_direction
+	#ledge_grab_ray.force_raycast_update()
+	#while ledge_grab_ray.is_colliding():
+		#ledge_grab_ray.force_raycast_update()
+	position.x -= looking_direction * 8
+	velocity += Vector2(8 * looking_direction, -200)
 
 
 func _on_sprite_animation_finished():

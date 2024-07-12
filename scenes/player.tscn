@@ -141,7 +141,14 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_eh1xa")
-wall_jump_direction = Vector2(10, 10)
+acceleration = 100.0
+speed = 300.0
+deceleration = 30.0
+gravity = 200
+air_acceleration = 100.0
+air_deceleration = 100.0
+jump_height = 100
+wall_jump_direction = Vector2(1000, 0)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cndae")
@@ -162,8 +169,13 @@ position_smoothing_enabled = true
 
 [node name="Left" type="RayCast2D" parent="."]
 enabled = false
-target_position = Vector2(-16, 0)
+target_position = Vector2(-20, 0)
 
 [node name="Right" type="RayCast2D" parent="."]
 enabled = false
-target_position = Vector2(16, 0)
+target_position = Vector2(20, 0)
+
+[node name="Ledge grab" type="RayCast2D" parent="."]
+position = Vector2(0, -20)
+enabled = false
+target_position = Vector2(-20, 0)

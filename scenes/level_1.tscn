@@ -106,9 +106,4 @@ layer_0/tile_data = PackedInt32Array(589824, 0, 0, 655359, 0, 0, 655358, 0, 0, 5
 
 [node name="Player" parent="." instance=ExtResource("1_xt31a")]
 position = Vector2(0, 118)
-deceleration = 100.0
-gravity = 1000
-air_acceleration = 10.0
-air_deceleration = 10.0
-jump_height = 50
-wall_jump_direction = Vector2(150, -50)
+wall_slide_speed = 40.0

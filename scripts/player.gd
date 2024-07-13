@@ -21,6 +21,8 @@ extends CharacterBody2D
 @export_range(10, 100, 5, "suffix:px") var jump_height: int
 # Wall jump
 @export var wall_jump_direction: Vector2
+# Wall slide
+@export_range(10.0, 100.0, 5, "suffix:px/s") var wall_slide_speed: float
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var left: RayCast2D = $Left
@@ -38,6 +40,7 @@ func _physics_process(delta):
 	# Get input
 	var direction: float = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
 	
+	#region On Floor
 	if is_on_floor():
 		if in_air:
 			in_air = false
@@ -74,19 +77,22 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("jump"):
 			jump()
 			sprite.play("jump")
+	#endregion
 	
-	# Not on floor
+	#region Not on floor
 	else:
 		in_air = true
 		running = false
 		
+		# Ledge Grab
 		if is_on_wall_only():
 			ledge_grab_ray.target_position.x = 20 * looking_direction
 			ledge_grab_ray.force_raycast_update()
 			if not ledge_grab_ray.is_colliding() and Input.is_action_just_pressed("jump"):
 				ledge_grab()
-				pass
+				return
 		
+		#region Wall Jump
 		left.force_raycast_update()
 		if left.is_colliding():
 			looking_direction = 1
@@ -94,9 +100,10 @@ func _physics_process(delta):
 			if Input.is_action_just_pressed("jump"):
 				wall_jump()
 				wall_sliding = false
-			else:
+			elif not wall_sliding:
 				wall_sliding = true
 				sprite.play("wall slide")
+		
 		else:
 			right.force_raycast_update()
 			if right.is_colliding():
@@ -105,19 +112,19 @@ func _physics_process(delta):
 				if Input.is_action_just_pressed("jump"):
 					wall_jump()
 					wall_sliding = false
-				else:
+				elif not wall_sliding:
 					wall_sliding = true
 					sprite.play("wall slide")
-					
 			elif wall_sliding:
 				wall_sliding = false
 				sprite.play("jump")
 				sprite.frame = 4
 				
-									  # CAUTION, WARNING: TO BE CHANGED
+									# CAUTION, WARNING: TO BE CHANGED
 				
 				push_warning("player.gd, line 107: must change sprite.frame to the frame when the sprite has arms up in the air")
 				running = false
+				#endregion
 		
 		if direction:
 			looking_direction = int(direction)
@@ -132,7 +139,8 @@ func _physics_process(delta):
 		if not direction:
 			velocity.x = move_toward(velocity.x, 0, air_deceleration)
 		
-		velocity += Vector2(0, gravity) * delta
+		velocity = Vector2(velocity.x, clamp(velocity.y + gravity * delta, -INF, wall_slide_speed if wall_sliding else INF))
+	#endregion
 	
 	move_and_slide()
 
@@ -142,6 +150,7 @@ func jump():
 
 
 func wall_jump():
+	print_rich("[color=yellow]⚠️ WALL JUMPED!!! ⚠️[/color]")
 	velocity += wall_jump_direction * looking_direction
 
 
@@ -151,7 +160,7 @@ func ledge_grab():
 	#while ledge_grab_ray.is_colliding():
 		#ledge_grab_ray.force_raycast_update()
 	position.x -= looking_direction * 8
-	velocity += Vector2(8 * looking_direction, -200)
+	velocity = Vector2(8 * looking_direction, -250)
 
 
 func _on_sprite_animation_finished():

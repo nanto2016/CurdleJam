@@ -143,12 +143,13 @@ animations = [{
 script = ExtResource("1_eh1xa")
 acceleration = 100.0
 speed = 300.0
-deceleration = 30.0
-gravity = 200
-air_acceleration = 100.0
-air_deceleration = 100.0
-jump_height = 100
-wall_jump_direction = Vector2(1000, 0)
+deceleration = 100.0
+gravity = 1000
+air_acceleration = 30.0
+air_deceleration = 30.0
+jump_height = 50
+wall_jump_direction = Vector2(500, -150)
+wall_slide_speed = 50.0
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cndae")

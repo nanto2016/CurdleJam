@@ -29,6 +29,8 @@ extends CharacterBody2D
 @onready var right: RayCast2D = $Right
 @onready var ledge_grab_ray: RayCast2D = $"Ledge grab"
 
+var gem: PackedScene = preload("res://scenes/gem.tscn")
+
 var in_air: bool = false
 var landing: bool = false
 var running: bool = false
@@ -37,12 +39,20 @@ var hanging: bool = false
 var ledge_grabbing: bool = false
 
 var looking_direction: int = -1
+var gems: int
 
 func _physics_process(delta):
 	if not ledge_grabbing:
 		var direction: float = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
 		var just_jumped: bool = true if Input.is_action_just_pressed("jump") else false
-
+		
+		if Input.is_action_just_pressed("throw"):
+			if gems > 0:
+				var new_gem: CharacterBody2D = gem.instantiate()
+				add_child(new_gem)
+				new_gem.throw(Vector2(100, 0))
+				gems -= 1
+		
 		if is_on_floor(): # On Floor
 			if in_air:
 				in_air = false
@@ -78,7 +88,7 @@ func _physics_process(delta):
 			if just_jumped:
 				jump()
 				sprite.play("jump")
-
+		
 		else: # Not on floor
 			running = false
 			
@@ -92,8 +102,11 @@ func _physics_process(delta):
 				ledge_grab_ray.force_raycast_update()
 				if not ledge_grab_ray.is_colliding():
 					looking_direction = int(direction)
-					if just_jumped and direction:
-						ledge_grab("left" if direction == -1 else "right")
+					left.force_raycast_update()
+					right.force_raycast_update()
+					if just_jumped and ((direction > 0 and not left.is_colliding()) or (direction < 0 and not right.is_colliding())):
+						print(int(direction))
+						ledge_grab(int(direction))
 						ledge_grabbing = true
 						direction = 0
 						just_jumped = false
@@ -159,6 +172,10 @@ func _physics_process(delta):
 						in_air = false
 						looking_direction = -1
 						sprite.flip_h = false
+				else: # Nor left nor right collided
+					$"Jump buffer".force_raycast_update()
+					if $"Jump buffer".is_colliding() and just_jumped:
+						jump()
 			#endregion
 			
 			if direction > 0:
@@ -170,30 +187,30 @@ func _physics_process(delta):
 			if not direction:
 				velocity.x = move_toward(velocity.x, 0, air_deceleration)
 			
+			velocity = Vector2(velocity.x, clamp(velocity.y + gravity * delta, -INF, wall_slide_speed if wall_sliding else INF))
+			
 			if velocity.y > 0 and not wall_sliding and not sprite.animation == StringName("fall"):
 				sprite.play("fall")
-		
-		if not is_on_floor():
-			velocity = Vector2(velocity.x, clamp(velocity.y + gravity * delta, -INF, wall_slide_speed if wall_sliding else INF))
 		
 		move_and_slide()
 
 
 func jump():
-	velocity += Vector2(0, -sqrt(2 * gravity * jump_height))
+	velocity = Vector2(velocity.x, -sqrt(2 * gravity * jump_height))
 
 
 func wall_jump():
 	velocity += Vector2(wall_jump_direction.x * looking_direction, wall_jump_direction.y)
 
 
-func ledge_grab(dir: String):
+func ledge_grab(dir: int):
 	ledge_grab_ray.force_raycast_update()
 	while not ledge_grab_ray.is_colliding():
 		position.y += 1
 		ledge_grab_ray.force_raycast_update()
 	position.y -= 2
-	$AnimationPlayer.play("ledge_grab_" + dir)
+	var left_or_right: String = "left" if dir < 0 else "right"
+	$AnimationPlayer.play("ledge_grab_" + left_or_right)
 
 
 func _on_sprite_animation_finished():
@@ -207,7 +224,7 @@ func _on_animation_finished():
 		landing = false
 
 
-func _on_ledge_grab_animation_finished(anim_name):
+func _on_ledge_grab_animation_finished(_anim_name):
 	global_position = sprite.global_position
 	sprite.position = Vector2.ZERO
 	ledge_grabbing = false

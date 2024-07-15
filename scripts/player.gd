@@ -52,7 +52,6 @@ var gems: int:
 		gems = value
 		$Sprite/Gems.size.y = 8 * ((value + 1) % 3 + 1)
 		$Sprite/Gems.size.x = 8 * int((value + 1) / 3.0 + 1)
-		print("YOU NOW HAVE ", value, " GEMS")
 
 
 func _ready():
@@ -71,10 +70,10 @@ func _physics_process(delta):
 		
 		if Input.is_action_just_pressed("pickup"):
 			show_range = true
-			var nearby_gems: Array = $Pickup.get_overlapping_bodies()
+			var nearby_gems: Array = $Pickup.get_overlapping_areas()
 			if nearby_gems.size() > 0:
 				# Pick up a gem
-				nearby_gems[0].queue_free()
+				nearby_gems[0].get_parent().queue_free()
 				gems += 1
 		
 		if is_on_floor(): # On Floor

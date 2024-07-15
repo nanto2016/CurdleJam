@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ppxfd7ewagfx"]
+[gd_scene load_steps=51 format=3 uid="uid://ppxfd7ewagfx"]
 
 [ext_resource type="Texture2D" uid="uid://nnw2ge51hjly" path="res://assets/player idle.png" id="1_bsqqq"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_eh1xa"]
@@ -9,9 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bc7emfo0br0" path="res://assets/player ledge grab.png" id="6_7bxkg"]
 [ext_resource type="Texture2D" uid="uid://cawqwxa1dtcwy" path="res://assets/player ledge hang.png" id="7_b8nss"]
 [ext_resource type="Texture2D" uid="uid://jt4geoibvoww" path="res://assets/player wall slide.png" id="7_fpxfq"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cndae"]
-size = Vector2(20, 36)
+[ext_resource type="Texture2D" uid="uid://ctyh8yxadq77o" path="res://assets/gems.png" id="10_cri25"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8r68"]
 atlas = ExtResource("2_qbsht")
@@ -293,6 +291,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cndae"]
+size = Vector2(20, 36)
+
 [sub_resource type="Animation" id="Animation_elxm0"]
 length = 0.001
 tracks/0/type = "value"
@@ -443,7 +444,14 @@ _data = {
 "ledge_grab_right": SubResource("Animation_b3c61")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gov8o"]
+radius = 32.0
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_eh1xa")
 acceleration = 100.0
 speed = 300.0
@@ -453,10 +461,8 @@ air_acceleration = 30.0
 air_deceleration = 30.0
 jump_height = 50
 wall_jump_direction = Vector2(500, -150)
-wall_slide_speed = 50.0
-
-[node name="Collision" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_cndae")
+wall_slide_speed = 40.0
+gem_weight = 2.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
@@ -473,6 +479,18 @@ limit_right = 576
 limit_bottom = 324
 limit_smoothed = true
 position_smoothing_enabled = true
+
+[node name="Gems" type="TextureRect" parent="Sprite"]
+offset_left = -3.0
+offset_top = -2.75
+offset_right = 29.0
+offset_bottom = 45.25
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("10_cri25")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cndae")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Left" type="RayCast2D" parent="."]
 enabled = false
@@ -495,5 +513,18 @@ libraries = {
 "": SubResource("AnimationLibrary_8l58h")
 }
 
+[node name="Pickup" type="Area2D" parent="."]
+collision_mask = 4
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Pickup"]
+shape = SubResource("CircleShape2D_gov8o")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Pickup range" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="animation_finished" from="Sprite" to="." method="_on_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_ledge_grab_animation_finished"]
+[connection signal="timeout" from="Pickup range" to="." method="_on_pickup_range_timeout"]

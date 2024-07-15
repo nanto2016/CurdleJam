@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dqqu76b3x61sv"]
+[gd_scene load_steps=65 format=3 uid="uid://dqqu76b3x61sv"]
 
 [ext_resource type="Script" path="res://scripts/gem.gd" id="1_mf1co"]
 [ext_resource type="Texture2D" uid="uid://bn4dogapyatxn" path="res://assets/gem0.png" id="2_k5p2f"]
@@ -422,7 +422,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_i1d8y"]
 radius = 16.0
 
-[node name="Gem" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_m1m11"]
+radius = 20.0
+
+[node name="Gem" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 5
 script = ExtResource("1_mf1co")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
@@ -432,4 +437,13 @@ animation = &"gem0"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_i1d8y")
+
+[node name="Freeze" type="Area2D" parent="."]
+collision_layer = 4
+monitorable = false
+
+[node name="Shape" type="CollisionShape2D" parent="Freeze"]
+shape = SubResource("CircleShape2D_m1m11")
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[connection signal="body_entered" from="Freeze" to="." method="_on_freeze_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://ppxfd7ewagfx"]
+[gd_scene load_steps=52 format=3 uid="uid://ppxfd7ewagfx"]
 
 [ext_resource type="Texture2D" uid="uid://nnw2ge51hjly" path="res://assets/player idle.png" id="1_bsqqq"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_eh1xa"]
@@ -9,7 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bc7emfo0br0" path="res://assets/player ledge grab.png" id="6_7bxkg"]
 [ext_resource type="Texture2D" uid="uid://cawqwxa1dtcwy" path="res://assets/player ledge hang.png" id="7_b8nss"]
 [ext_resource type="Texture2D" uid="uid://jt4geoibvoww" path="res://assets/player wall slide.png" id="7_fpxfq"]
-[ext_resource type="Texture2D" uid="uid://ctyh8yxadq77o" path="res://assets/gems.png" id="10_cri25"]
+[ext_resource type="Texture2D" uid="uid://bml1fs1tmbi02" path="res://assets/gems left.png" id="10_m03s1"]
+[ext_resource type="Texture2D" uid="uid://yyudxoihq7x2" path="res://assets/gems right.png" id="11_l55b1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8r68"]
 atlas = ExtResource("2_qbsht")
@@ -480,13 +481,25 @@ limit_bottom = 324
 limit_smoothed = true
 position_smoothing_enabled = true
 
-[node name="Gems" type="TextureRect" parent="Sprite"]
+[node name="GemsLeft" type="TextureRect" parent="Sprite"]
 offset_left = -3.0
+offset_top = -3.0
+offset_right = 13.0
+offset_bottom = 45.0
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("10_m03s1")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="GemsRight" type="TextureRect" parent="Sprite"]
+offset_left = -1.0
 offset_top = -2.75
-offset_right = 29.0
+offset_right = 15.0
 offset_bottom = 45.25
 scale = Vector2(0.125, 0.125)
-texture = ExtResource("10_cri25")
+texture = ExtResource("11_l55b1")
+expand_mode = 1
+stretch_mode = 1
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cndae")

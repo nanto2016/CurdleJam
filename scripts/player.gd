@@ -50,8 +50,8 @@ var looking_direction: int = -1
 var gems: int:
 	set(value):
 		gems = value
-		$Sprite/Gems.size.y = 8 * ((value + 1) % 3 + 1)
-		$Sprite/Gems.size.x = 8 * int((value + 1) / 3.0 + 1)
+		$Sprite/GemsLeft.size.y = 16 * clampi(value, 0, 3)
+		$Sprite/GemsRight.size.y = 16 * clampi(value - 3, 0, 3)
 
 
 func _ready():

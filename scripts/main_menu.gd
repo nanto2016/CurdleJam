@@ -1,6 +1,6 @@
 extends Control
 
-var level_1: PackedScene = preload("res://scenes/level_1.tscn")
+var tutorial: PackedScene = preload("res://scenes/tutorial.tscn")
 
 
 func _ready():
@@ -16,8 +16,7 @@ func _on_animation_player_animation_finished(anim_name):
 		$WaitBeforeButtonsAppear.start()
 		$Title/BURROW/CPUParticles2D.emitting = true
 	if anim_name == StringName("transition_out"):
-		get_parent().add_child(level_1.instantiate())
-		queue_free()
+		$WaitBeforeChangingScenes.start()
 
 
 func _on_play_pressed():
@@ -27,3 +26,8 @@ func _on_play_pressed():
 func _on_timer_timeout():
 		$Buttons.visible = true
 		$Buttons/Play/CPUParticles2D.emitting = true
+
+
+func _on_timer_2_timeout():
+		get_parent().add_child(tutorial.instantiate())
+		queue_free()

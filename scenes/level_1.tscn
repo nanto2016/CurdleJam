@@ -120,3 +120,12 @@ color = 2
 [node name="Gem3" parent="." instance=ExtResource("11_3qcfk")]
 position = Vector2(172, 68)
 color = 1
+
+[node name="Gem4" parent="." instance=ExtResource("11_3qcfk")]
+position = Vector2(-46, 29)
+
+[node name="Gem5" parent="." instance=ExtResource("11_3qcfk")]
+position = Vector2(51, 28)
+
+[node name="Gem6" parent="." instance=ExtResource("11_3qcfk")]
+position = Vector2(1, 49)

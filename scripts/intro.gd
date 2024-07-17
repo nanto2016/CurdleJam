@@ -12,6 +12,7 @@ func _ready():
 func _on_animation_finished(anim_name):
 	# After having walked for 3 seconds, stand still
 	if anim_name == StringName("intro"):
+		$PlayerAnimation.stop()
 		$Player.play("idle")
 		$WaitBeforeStartingScreenShake.start()
 

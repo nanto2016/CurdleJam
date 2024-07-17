@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b10vqxmu8tum1"]
+[gd_scene load_steps=32 format=3 uid="uid://b10vqxmu8tum1"]
 
 [ext_resource type="Script" path="res://scripts/intro.gd" id="1_4o208"]
 [ext_resource type="Texture2D" uid="uid://b1tgyjjhs7l0" path="res://assets/background.png" id="1_35f52"]
@@ -116,6 +116,40 @@ _data = {
 "RESET": SubResource("Animation_t4y7b"),
 "fall": SubResource("Animation_vmftb"),
 "intro": SubResource("Animation_xax8d")
+}
+
+[sub_resource type="Animation" id="Animation_r83pl"]
+resource_name = "walk"
+length = 0.50001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Player:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"walk"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Player:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bsthg"]
+_data = {
+"walk": SubResource("Animation_r83pl")
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2acpd"]
@@ -245,9 +279,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wtosl")
 }],
-"loop": true,
+"loop": false,
 "name": &"walk",
-"speed": 8.0
+"speed": 0.0
 }]
 
 [node name="Intro" type="Control"]
@@ -265,8 +299,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.5
 anchor_right = 1.0
-offset_left = -576.0
-offset_right = 11520.0
+offset_right = 12096.0
 offset_bottom = 648.0
 texture = ExtResource("1_35f52")
 stretch_mode = 1
@@ -297,12 +330,17 @@ libraries = {
 }
 autoplay = "intro"
 
+[node name="PlayerAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bsthg")
+}
+autoplay = "walk"
+
 [node name="Player" type="AnimatedSprite2D" parent="."]
 position = Vector2(571, 540)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_lxadx")
-animation = &"idle"
-autoplay = "walk"
+animation = &"walk"
 
 [node name="WaitBeforeStartingScreenShake" type="Timer" parent="."]
 wait_time = 0.5

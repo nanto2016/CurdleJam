@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://ppxfd7ewagfx"]
+[gd_scene load_steps=57 format=3 uid="uid://ppxfd7ewagfx"]
 
 [ext_resource type="Texture2D" uid="uid://nnw2ge51hjly" path="res://assets/player idle.png" id="1_bsqqq"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_eh1xa"]
@@ -158,7 +158,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"fall",
-"speed": 18.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -197,9 +197,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1q5j4")
 }],
-"loop": true,
+"loop": false,
 "name": &"idle",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -216,7 +216,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"jump",
-"speed": 18.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -233,7 +233,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"land",
-"speed": 18.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -253,7 +253,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ledge grab",
-"speed": 12.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -261,7 +261,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"ledge hang",
-"speed": 5.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -279,9 +279,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1bb0y")
 }],
-"loop": true,
+"loop": false,
 "name": &"run",
-"speed": 15.0
+"speed": 0.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -438,11 +438,163 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_qa7kx"]
+resource_name = "land"
+length = 0.222228
+step = 0.0555556
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0555556, 0.111111, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"land"]
+}
+
+[sub_resource type="Animation" id="Animation_prbys"]
+resource_name = "run"
+length = 0.33334
+loop_mode = 1
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"run"]
+}
+
+[sub_resource type="Animation" id="Animation_jr2nl"]
+resource_name = "fall"
+length = 0.166672
+step = 0.0555556
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fall"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0555556, 0.111111),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_wek61"]
+resource_name = "idle"
+length = 2.40002
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"idle"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_5ryj4"]
+resource_name = "jump"
+length = 0.166672
+step = 0.0555556
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0555556, 0.111111),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8l58h"]
 _data = {
 "RESET": SubResource("Animation_elxm0"),
+"fall": SubResource("Animation_jr2nl"),
+"idle": SubResource("Animation_wek61"),
+"jump": SubResource("Animation_5ryj4"),
+"land": SubResource("Animation_qa7kx"),
 "ledge_grab_left": SubResource("Animation_mfbfh"),
-"ledge_grab_right": SubResource("Animation_b3c61")
+"ledge_grab_right": SubResource("Animation_b3c61"),
+"run": SubResource("Animation_prbys")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gov8o"]
@@ -468,8 +620,7 @@ gem_weight = 2.0
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_er3ws")
-animation = &"idle"
-autoplay = "idle"
+animation = &"fall"
 offset = Vector2(0, -1.5)
 flip_h = true
 
@@ -517,6 +668,11 @@ position = Vector2(0, -20)
 enabled = false
 target_position = Vector2(-20, 0)
 
+[node name="Ledge hang" type="RayCast2D" parent="."]
+position = Vector2(0, -26)
+enabled = false
+target_position = Vector2(-20, 0)
+
 [node name="Jump buffer" type="RayCast2D" parent="."]
 target_position = Vector2(0, 28)
 
@@ -537,6 +693,5 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 wait_time = 0.1
 one_shot = true
 
-[connection signal="animation_finished" from="Sprite" to="." method="_on_animation_finished"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_ledge_grab_animation_finished"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="timeout" from="Pickup range" to="." method="_on_pickup_range_timeout"]

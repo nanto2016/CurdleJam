@@ -37,8 +37,8 @@ var in_air: bool = false
 var landing: bool = false
 var running: bool = false
 var wall_sliding: bool = false
-var hanging: bool = false
 var ledge_grabbing: bool = false
+var ledge_hanging: bool = false
 var show_range: bool = false:
 	set(value):
 		show_range = value
@@ -56,6 +56,8 @@ var gem_colors: Array[int] = [-1, -1, -1, -1, -1, -1]
 
 
 func _ready():
+	gems = 0
+	sprite.stop()
 	push_warning("The indicator showing the number of gems doesn't match the color of the gems picked up")
 
 
@@ -80,13 +82,13 @@ func _physics_process(delta):
 		if is_on_floor(): # On Floor
 			if in_air:
 				in_air = false
-				sprite.play("land")
+				$AnimationPlayer.play("land")
 				landing = true
 				running = false
 			
 			if wall_sliding:
 				wall_sliding = false
-				sprite.play("idle")
+				$AnimationPlayer.play("idle")
 				running = false
 			
 			if direction > 0:
@@ -99,19 +101,19 @@ func _physics_process(delta):
 				looking_direction = int(direction)
 				if not landing and not running:
 						running = true
-						sprite.play("run")
+						$AnimationPlayer.play("run")
 				sprite.flip_h = true if looking_direction > 0 else false
 			
 			# deceleration
 			else:
 				velocity.x = move_toward(velocity.x, 0, deceleration)
 				if not landing:
-					sprite.play("idle")
+					$AnimationPlayer.play("idle")
 					running = false
 			
 			if just_jumped:
 				jump()
-				sprite.play("jump")
+				$AnimationPlayer.play("jump")
 		
 		else: # Not on floor
 			running = false
@@ -137,27 +139,32 @@ func _physics_process(delta):
 						wall_sliding = false
 						in_air = true
 						return
-					else:
-						wall_sliding = false
-						if not hanging:
-							hanging = true
-							sprite.play("ledge hang")
 				else:
-					in_air = false
-					wall_sliding = true
-					sprite.play("wall slide")
-					left.force_raycast_update()
-					if left.is_colliding():
-						looking_direction = 1
-						sprite.flip_h = true
+					$"Ledge hang".target_position.x = 20 * direction
+					$"Ledge hang".force_raycast_update()
+					if not $"Ledge hang".is_colliding():
+						if not ledge_hanging:
+							ledge_hanging = true
+							$AnimationPlayer.stop()
+							sprite.frame = 0
+							sprite.animation = StringName("ledge hang")
 					else:
-						looking_direction = -1
+						in_air = false
+						wall_sliding = true
+						sprite.animation = StringName("wall slide")
+						left.force_raycast_update()
+						if left.is_colliding():
+							looking_direction = 1
+							sprite.flip_h = true
+						else:
+							looking_direction = -1
 						sprite.flip_h = false
 			else: # Not on Wall
 				in_air = true
+				ledge_hanging = false
 				if wall_sliding:
 					wall_sliding = false
-					sprite.play("fall")
+					$AnimationPlayer.play("fall")
 			#endregion
 			
 			#region Wall Jump
@@ -173,7 +180,8 @@ func _physics_process(delta):
 				elif is_on_wall():
 					if not wall_sliding:
 						wall_sliding = true
-						sprite.play("wall slide")
+						$AnimationPlayer.stop()
+						sprite.animation = StringName("wall slide")
 					in_air = false
 					looking_direction = 1
 					sprite.flip_h = true
@@ -191,7 +199,8 @@ func _physics_process(delta):
 					elif is_on_wall():
 						if not wall_sliding:
 							wall_sliding = true
-							sprite.play("wall slide")
+							$AnimationPlayer.stop()
+							sprite.animation = StringName("wall slide")
 						in_air = false
 						looking_direction = -1
 						sprite.flip_h = false
@@ -210,10 +219,11 @@ func _physics_process(delta):
 			if not direction:
 				velocity.x = move_toward(velocity.x, 0, air_deceleration)
 			
-			velocity = Vector2(velocity.x, clamp(velocity.y + gravity * delta + gem_weight * gems, -INF, wall_slide_speed if wall_sliding else INF))
+			if not ledge_hanging:
+				velocity = Vector2(velocity.x, clamp(velocity.y + gravity * delta + gem_weight * gems, -INF, wall_slide_speed if wall_sliding else INF))
 			
 			if velocity.y > 0 and not wall_sliding and not sprite.animation == StringName("fall"):
-				sprite.play("fall")
+				$AnimationPlayer.play("fall")
 		
 		move_and_slide()
 
@@ -227,6 +237,7 @@ func wall_jump():
 
 
 func ledge_grab(dir: int):
+	ledge_hanging = false
 	ledge_grab_ray.force_raycast_update()
 	while not ledge_grab_ray.is_colliding():
 		position.y += 1
@@ -242,15 +253,13 @@ func _on_sprite_animation_finished():
 
 
 # AnimatedSprite2D animations
-func _on_animation_finished():
-	if sprite.animation == StringName("land"):
+func _on_animation_finished(anim_name: StringName):
+	if anim_name.substr(0, 10) == "ledge_grab":
+		global_position = sprite.global_position
+		sprite.position = Vector2.ZERO
+		ledge_grabbing = false
+	elif anim_name == StringName("land"):
 		landing = false
-
-
-func _on_ledge_grab_animation_finished(_anim_name):
-	global_position = sprite.global_position
-	sprite.position = Vector2.ZERO
-	ledge_grabbing = false
 
 
 func throw_gem():

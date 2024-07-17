@@ -52,11 +52,11 @@ var gems: int:
 		gems = value
 		$Sprite/GemsLeft.size.y = 16 * clampi(value, 0, 3)
 		$Sprite/GemsRight.size.y = 16 * clampi(value - 3, 0, 3)
+var gem_colors: Array[int] = [-1, -1, -1, -1, -1, -1]
 
 
 func _ready():
-	gems = 6
-	push_warning("CAUTION: PLAYER START WITH ", gems, " GEMS")
+	push_warning("The indicator showing the number of gems doesn't match the color of the gems picked up")
 
 
 func _physics_process(delta):
@@ -73,8 +73,9 @@ func _physics_process(delta):
 			var nearby_gems: Array = $Pickup.get_overlapping_areas()
 			if nearby_gems.size() > 0:
 				# Pick up a gem
-				nearby_gems[0].get_parent().queue_free()
 				gems += 1
+				gem_colors[gems - 1] = nearby_gems[0].get_parent().color
+				nearby_gems[0].get_parent().queue_free()
 		
 		if is_on_floor(): # On Floor
 			if in_air:
@@ -256,6 +257,8 @@ func throw_gem():
 	var new_gem: RigidBody2D = gem.instantiate()
 	new_gem.global_position = global_position
 	get_parent().add_child(new_gem)
+	new_gem.color = gem_colors[gems - 1]
+	new_gem.update_color()
 	new_gem.throw(get_local_mouse_position().limit_length(150))
 	gems -= 1
 

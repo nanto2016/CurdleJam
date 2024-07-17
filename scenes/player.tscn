@@ -460,7 +460,7 @@ deceleration = 100.0
 gravity = 1000
 air_acceleration = 30.0
 air_deceleration = 30.0
-jump_height = 50
+jump_height = 65
 wall_jump_direction = Vector2(500, -150)
 wall_slide_speed = 40.0
 gem_weight = 2.0
@@ -478,7 +478,6 @@ scale = Vector2(0.25, 0.25)
 limit_left = -576
 limit_right = 576
 limit_bottom = 324
-limit_smoothed = true
 position_smoothing_enabled = true
 
 [node name="GemsLeft" type="TextureRect" parent="Sprite"]

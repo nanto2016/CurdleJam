@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cd5c38g4t8826"]
+[gd_scene load_steps=22 format=3 uid="uid://cd5c38g4t8826"]
 
 [ext_resource type="PackedScene" uid="uid://ppxfd7ewagfx" path="res://scenes/player.tscn" id="1_xt31a"]
 [ext_resource type="Texture2D" uid="uid://bs0txg65qfvvi" path="res://assets/Dithering - light dirt.png" id="1_yiwn4"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://byxjmm21pyj6q" path="res://assets/Lines - Vertical - light dirt.png" id="7_x43ku"]
 [ext_resource type="Texture2D" uid="uid://b8a3vsh64vrtt" path="res://assets/Lines - Vertical - packed soil.png" id="8_5f4g7"]
 [ext_resource type="Texture2D" uid="uid://dbu3v348bv8g2" path="res://assets/Lines - Vertical - rock and stone.png" id="9_b28hs"]
+[ext_resource type="PackedScene" uid="uid://dqqu76b3x61sv" path="res://scenes/gem.tscn" id="11_3qcfk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1wvu0"]
 texture = ExtResource("1_yiwn4")
@@ -107,4 +108,15 @@ layer_0/tile_data = PackedInt32Array(589824, 0, 0, 655359, 0, 0, 655358, 0, 0, 5
 
 [node name="Player" parent="." instance=ExtResource("1_xt31a")]
 position = Vector2(0, 118)
+jump_height = 50
 wall_jump_direction = Vector2(350, -150)
+
+[node name="Gem" parent="." instance=ExtResource("11_3qcfk")]
+position = Vector2(-28, -93)
+color = 2
+
+[node name="Gem2" parent="." instance=ExtResource("11_3qcfk")]
+
+[node name="Gem3" parent="." instance=ExtResource("11_3qcfk")]
+position = Vector2(172, 68)
+color = 1

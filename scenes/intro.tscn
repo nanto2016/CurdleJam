@@ -110,6 +110,20 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-576, 0), Vector2(0, 0)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Earthquake")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_p7rj0"]
 _data = {
@@ -145,6 +159,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bsthg"]
@@ -299,7 +327,8 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.5
 anchor_right = 1.0
-offset_right = 12096.0
+offset_left = -576.0
+offset_right = 27072.0
 offset_bottom = 648.0
 texture = ExtResource("1_35f52")
 stretch_mode = 1
@@ -341,6 +370,7 @@ position = Vector2(571, 540)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_lxadx")
 animation = &"walk"
+frame = 4
 
 [node name="WaitBeforeStartingScreenShake" type="Timer" parent="."]
 wait_time = 0.5
@@ -358,6 +388,23 @@ one_shot = true
 layout_mode = 0
 offset_right = 1152.0
 color = Color(0, 0, 0, 1)
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+bank_paths = ["res://assets/sound/Desktop/Master.strings.bank", "res://assets/sound/Desktop/Master.bank"]
+
+[node name="Footsteps" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Footsteps Grass"
+event_guid = "{92353415-865e-4e06-87f6-9f4595ad6f18}"
+
+[node name="Ambience" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/intro_amb"
+event_guid = "{f92a1b25-13ec-478d-b402-c35c8c6402df}"
+autoplay = true
+auto_release = true
+
+[node name="Earthquake" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Earthquake"
+event_guid = "{e63d6f72-b043-45fa-9945-706778fcb54f}"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="timeout" from="WaitBeforeStartingScreenShake" to="." method="_on_timer_1_timeout"]

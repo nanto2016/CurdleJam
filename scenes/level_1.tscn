@@ -112,3 +112,8 @@ gem_weight = 1.5
 
 [node name="Lava" parent="." instance=ExtResource("11_ptj6d")]
 position = Vector2(0, 648)
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+bank_paths = ["res://assets/sound/Desktop/Master.strings.bank", "res://assets/sound/Desktop/Master.bank"]
+
+[node name="FmodListener2D" type="FmodListener2D" parent="."]

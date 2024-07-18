@@ -421,6 +421,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Jump")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qa7kx"]
 resource_name = "land"
@@ -584,6 +598,20 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"run"]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8l58h"]
 _data = {
@@ -620,7 +648,7 @@ gem_weight = 1.9
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_er3ws")
-animation = &"fall"
+animation = &"jump"
 offset = Vector2(0, -1.5)
 flip_h = true
 
@@ -692,6 +720,19 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 [node name="Pickup range" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+bank_paths = ["res://assets/sound/Desktop/Master.strings.bank", "res://assets/sound/Desktop/Master.bank"]
+
+[node name="Footsteps" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Footsteps Grass"
+event_guid = "{92353415-865e-4e06-87f6-9f4595ad6f18}"
+
+[node name="Jump" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/Jump"
+event_guid = "{1f33670d-b34c-4863-9e60-2861010ff31b}"
+
+[node name="FmodListener2D" type="FmodListener2D" parent="."]
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="timeout" from="Pickup range" to="." method="_on_pickup_range_timeout"]

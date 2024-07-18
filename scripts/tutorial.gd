@@ -1,5 +1,7 @@
 extends ColorRect
 
+@onready var ui_confirm = %Ui_Confirm
+
 var level_1: PackedScene = preload("res://scenes/level_1.tscn")
 var text: PackedStringArray = [
 "[center]Your goal in this game is to escape this hole you fell into
@@ -46,3 +48,4 @@ func _on_next_pressed():
 	$CenterContainer/Text.text = text[anim]
 	$Instructions.animation = StringName(var_to_str(anim))
 	$Instructions.play()
+	ui_confirm.play()

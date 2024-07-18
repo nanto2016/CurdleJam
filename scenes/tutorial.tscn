@@ -360,4 +360,14 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 16
 text = "NEXT"
 
+[node name="FmodBankLoader" type="FmodBankLoader" parent="."]
+bank_paths = ["res://assets/sound/Desktop/Master.strings.bank", "res://assets/sound/Desktop/Master.bank"]
+
+[node name="Ui_Confirm" type="FmodEventEmitter2D" parent="."]
+event_name = "event:/ui_confirm"
+event_guid = "{07307f18-a14f-4aca-a402-9a3d2562d563}"
+unique_name_in_owner = true
+
+[node name="FmodListener2D" type="FmodListener2D" parent="."]
+
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

@@ -14,3 +14,5 @@ script = ExtResource("1_53esf")
 
 [node name="Intro" parent="." instance=ExtResource("2_gqqnx")]
 layout_mode = 1
+
+[node name="FmodListener2D" type="FmodListener2D" parent="."]

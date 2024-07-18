@@ -24,7 +24,10 @@ How to climb:
 -
 [u]E[/u] or [u]RIGHT-CLICK[/u] to [u]PICK UP[/u] [color=green]GEMS[/color][/center]",
 "[center][color=darkkhaki]LEDGE HANG[/color] and [color=goldenrod]LEDGE GRAB[/color]
-Move towards a platform's edge and press [u]JUMP[/u] to [color=goldenrod]LEDGE GRAB[/color][/center]"]
+Move towards a platform's edge and press [u]JUMP[/u] to [color=goldenrod]LEDGE GRAB[/color][/center]",
+"[center]INSERT MORE INFORMATION HERE[/center]",
+"[center]For more information, you may look at the [color=firebrick]itch.io[/color] page
+It contains detailed instuctions and tips[/center]"]
 
 var anim: int = 0
 

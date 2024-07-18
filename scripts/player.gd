@@ -24,7 +24,7 @@ extends CharacterBody2D
 ## Max speed at which you can go while sliding on a wall
 @export_range(10.0, 100.0, 5, "suffix:px/s") var wall_slide_speed: float
 ## How much acceleration towards the ground each Gem will it add to gravity
-@export_range(1.0, 10.0, 0.5, "suffix:px/s²") var gem_weight: float
+@export_range(1.0, 10.0, 0.1, "suffix:px/s²", "slider_only") var gem_weight: float
 
 @onready var sprite: AnimatedSprite2D = $Sprite
 @onready var left: RayCast2D = $Left
@@ -56,7 +56,7 @@ var gem_colors: Array[int] = [-1, -1, -1, -1, -1, -1]
 
 
 func _ready():
-	gems = 0
+	gems = 6 # CAREFUL!!!!!! WARNING CAUTION TODO CAREFUL!!!!!!
 	sprite.stop()
 	push_warning("The indicator showing the number of gems doesn't match the color of the gems picked up")
 

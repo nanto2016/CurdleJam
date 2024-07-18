@@ -612,10 +612,10 @@ deceleration = 100.0
 gravity = 1000
 air_acceleration = 30.0
 air_deceleration = 30.0
-jump_height = 65
-wall_jump_direction = Vector2(500, -150)
+jump_height = 50
+wall_jump_direction = Vector2(350, -150)
 wall_slide_speed = 40.0
-gem_weight = 2.0
+gem_weight = 1.9
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)

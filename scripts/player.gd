@@ -145,6 +145,7 @@ func _physics_process(delta):
 					if not $"Ledge hang".is_colliding():
 						if not ledge_hanging:
 							ledge_hanging = true
+							velocity.y = 0
 							$AnimationPlayer.stop()
 							sprite.frame = 0
 							sprite.animation = StringName("ledge hang")
@@ -221,6 +222,9 @@ func _physics_process(delta):
 			
 			if not ledge_hanging:
 				velocity = Vector2(velocity.x, clamp(velocity.y + gravity * delta + gem_weight * gems, -INF, wall_slide_speed if wall_sliding else INF))
+			else:
+				if just_jumped:
+					ledge_grab(int(direction))
 			
 			if velocity.y > 0 and not wall_sliding and not sprite.animation == StringName("fall"):
 				$AnimationPlayer.play("fall")
@@ -237,12 +241,19 @@ func wall_jump():
 
 
 func ledge_grab(dir: int):
-	ledge_hanging = false
+	var BREAK_OUT: int = 0
 	ledge_grab_ray.force_raycast_update()
+	if ledge_hanging:
+		position.y -= 12
 	while not ledge_grab_ray.is_colliding():
+		if BREAK_OUT > 50:
+			break
+		BREAK_OUT += 1
 		position.y += 1
 		ledge_grab_ray.force_raycast_update()
-	position.y -= 2
+	if not ledge_hanging:
+		position.y -= 2
+	ledge_hanging = false
 	var left_or_right: String = "left" if dir < 0 else "right"
 	$AnimationPlayer.play("ledge_grab_" + left_or_right)
 

@@ -10,7 +10,21 @@ press [u]E[/u] or [u]Right-Click[/u] to pick them up[/center]",
 Though every [color=green]GEM[/color] makes you [color=salmon]heavier[/color],
 [color=salmon]slowing[/color] you down in your escape,
 which can be fatal [wave]because...[/wave][/center]",
-"[center]...the [color=orange]LAVA[/color] is rising![/center]"]
+"[center]...the [color=orange]LAVA[/color] is rising![/center]",
+"[center] 
+ 
+ 
+How to climb:
+-
+[u]WASD[/u] to move
+-
+[u]SPACE[/u] to jump
+-
+[u]Q[/u] or [u]LEFT-CLICK[/u] to [u]THROW[/u] [color=green]GEMS[/color]
+-
+[u]E[/u] or [u]RIGHT-CLICK[/u] to [u]PICK UP[/u] [color=green]GEMS[/color][/center]",
+"[center][color=darkkhaki]LEDGE HANG[/color] and [color=goldenrod]LEDGE GRAB[/color]
+Move towards a platform's edge and press [u]JUMP[/u] to [color=goldenrod]LEDGE GRAB[/color][/center]"]
 
 var anim: int = 0
 

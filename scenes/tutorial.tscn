@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b6tanbd036i7a"]
+[gd_scene load_steps=47 format=3 uid="uid://b6tanbd036i7a"]
 
 [ext_resource type="Script" path="res://scripts/tutorial.gd" id="1_pnqy8"]
 [ext_resource type="Texture2D" uid="uid://cp5odg0iwvy2n" path="res://assets/zero.png" id="2_mf7wc"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://hojvgcdk4sr7" path="res://assets/two.png" id="4_xqvah"]
 [ext_resource type="FontFile" uid="uid://dbesyckcqys2o" path="res://assets/Perfect DOS VGA 437 Win.ttf" id="5_pxhj5"]
 [ext_resource type="Texture2D" uid="uid://ddcn36602mrb3" path="res://assets/three.png" id="5_vemmo"]
+[ext_resource type="Texture2D" uid="uid://c8nqi20a6ypr1" path="res://assets/five.png" id="6_ak1wc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ia3o4"]
 atlas = ExtResource("2_mf7wc")
@@ -118,6 +119,38 @@ region = Rect2(0, 32, 32, 32)
 atlas = ExtResource("5_vemmo")
 region = Rect2(32, 32, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pusn1"]
+atlas = ExtResource("6_ak1wc")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4noq"]
+atlas = ExtResource("6_ak1wc")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkl2r"]
+atlas = ExtResource("6_ak1wc")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23bir"]
+atlas = ExtResource("6_ak1wc")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhcus"]
+atlas = ExtResource("6_ak1wc")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oysx1"]
+atlas = ExtResource("6_ak1wc")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hlxe"]
+atlas = ExtResource("6_ak1wc")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ya7d2"]
+atlas = ExtResource("6_ak1wc")
+region = Rect2(32, 64, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xkdkd"]
 animations = [{
 "frames": [{
@@ -220,6 +253,43 @@ animations = [{
 "loop": true,
 "name": &"3",
 "speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"4",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pusn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4noq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkl2r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23bir")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhcus")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oysx1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hlxe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ya7d2")
+}],
+"loop": true,
+"name": &"5",
+"speed": 5.0
 }]
 
 [node name="Tutorial" type="ColorRect"]
@@ -235,9 +305,8 @@ script = ExtResource("1_pnqy8")
 position = Vector2(576, 324)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xkdkd")
-animation = &"2"
+animation = &"4"
 autoplay = "0"
-frame_progress = 0.829822
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -255,10 +324,8 @@ theme_override_font_sizes/italics_font_size = 32
 theme_override_font_sizes/bold_italics_font_size = 32
 theme_override_font_sizes/mono_font_size = 32
 bbcode_enabled = true
-text = "[center]Take as many as possible with you!
-Though every [color=green]GEM[/color] makes you [u]heavier[/u],
-[u]slowing[/u] you down in your escape,
-which can be fatal [wave]because...[/wave][/center]"
+text = "[center][color=darkkhaki]LEDGE HANG[/color] and [color=goldenrod]LEDGE GRAB[/color]
+Move towards a platform's edge and press [u]JUMP[/u] to [color=goldenrod]LEDGE GRAB[/color][/center]"
 fit_content = true
 scroll_active = false
 

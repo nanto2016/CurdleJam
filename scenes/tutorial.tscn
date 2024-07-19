@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://b6tanbd036i7a"]
+[gd_scene load_steps=63 format=3 uid="uid://b6tanbd036i7a"]
 
 [ext_resource type="Script" path="res://scripts/tutorial.gd" id="1_pnqy8"]
 [ext_resource type="Texture2D" uid="uid://cp5odg0iwvy2n" path="res://assets/zero.png" id="2_mf7wc"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://dbesyckcqys2o" path="res://assets/Perfect DOS VGA 437 Win.ttf" id="5_pxhj5"]
 [ext_resource type="Texture2D" uid="uid://ddcn36602mrb3" path="res://assets/three.png" id="5_vemmo"]
 [ext_resource type="Texture2D" uid="uid://c8nqi20a6ypr1" path="res://assets/five.png" id="6_ak1wc"]
+[ext_resource type="Texture2D" uid="uid://cniujfgvmtuf3" path="res://assets/six.png" id="7_nbs36"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ia3o4"]
 atlas = ExtResource("2_mf7wc")
@@ -151,6 +152,66 @@ region = Rect2(0, 64, 32, 32)
 atlas = ExtResource("6_ak1wc")
 region = Rect2(32, 64, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihryo"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tohda"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s7xu"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gmdg3"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1l443"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fai3"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_do14p"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1hl2"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05mcu"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_736hy"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xun8o"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4s6c6"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yntms"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dryoi"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4l23"]
+atlas = ExtResource("7_nbs36")
+region = Rect2(64, 96, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xkdkd"]
 animations = [{
 "frames": [{
@@ -290,6 +351,56 @@ animations = [{
 "loop": true,
 "name": &"5",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihryo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tohda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7s7xu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gmdg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1l443")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_6fai3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_do14p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1hl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05mcu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_736hy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xun8o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4s6c6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yntms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dryoi")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_o4l23")
+}],
+"loop": true,
+"name": &"6",
+"speed": 5.0
 }]
 
 [node name="Tutorial" type="ColorRect"]
@@ -305,8 +416,9 @@ script = ExtResource("1_pnqy8")
 position = Vector2(576, 324)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xkdkd")
-animation = &"4"
+animation = &"6"
 autoplay = "0"
+frame_progress = 0.274692
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -324,8 +436,8 @@ theme_override_font_sizes/italics_font_size = 32
 theme_override_font_sizes/bold_italics_font_size = 32
 theme_override_font_sizes/mono_font_size = 32
 bbcode_enabled = true
-text = "[center][color=darkkhaki]LEDGE HANG[/color] and [color=goldenrod]LEDGE GRAB[/color]
-Move towards a platform's edge and press [u]JUMP[/u] to [color=goldenrod]LEDGE GRAB[/color][/center]"
+text = "[center]To cross a large gap, [u]THROW[/u] a [color=green]GEM[/color] to be lighter
+then [u]PICK UP[/u] that [color=green]GEM[/color] in the air[/center]"
 fit_content = true
 scroll_active = false
 

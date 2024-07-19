@@ -56,7 +56,7 @@ var gem_colors: Array[int] = [-1, -1, -1, -1, -1, -1]
 
 
 func _ready():
-	gems = 6 # CAREFUL!!!!!! WARNING CAUTION TODO CAREFUL!!!!!!
+	gems = 0
 	sprite.stop()
 	push_warning("The indicator showing the number of gems doesn't match the color of the gems picked up")
 
@@ -279,7 +279,7 @@ func throw_gem():
 	get_parent().add_child(new_gem)
 	new_gem.color = gem_colors[gems - 1]
 	new_gem.update_color()
-	new_gem.throw(get_local_mouse_position().limit_length(150))
+	new_gem.throw(get_local_mouse_position().limit_length(125) * 2)
 	gems -= 1
 
 

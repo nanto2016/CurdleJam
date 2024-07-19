@@ -1,13 +1,24 @@
 [gd_scene load_steps=7 format=3 uid="uid://vuo7ambiskv3"]
 
-[ext_resource type="Shader" path="res://scripts/scrolling.gdshader" id="1_47257"]
 [ext_resource type="Script" path="res://scripts/lava.gd" id="1_j44wj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6yfd"]
 size = Vector2(1152, 648)
 
+[sub_resource type="Shader" id="Shader_r4y6m"]
+code = "shader_type canvas_item;
+
+uniform vec2 direction = vec2(0.0, 1.0);
+
+void fragment() {
+	COLOR = texture(TEXTURE, UV + direction * TIME);
+	COLOR.r *= 2.0;
+	COLOR.g /= 1.25;
+	COLOR.b /= 2.0;
+}"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ehwq6"]
-shader = ExtResource("1_47257")
+shader = SubResource("Shader_r4y6m")
 shader_parameter/direction = Vector2(0, 0.01)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_q2vua"]

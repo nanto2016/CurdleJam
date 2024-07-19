@@ -11,4 +11,5 @@ func _process(_delta):
 
 func _unhandled_key_input(event):
 	if event.is_action_pressed("quit"):
-		get_tree().quit()
+		#get_tree().quit()
+		push_warning("CANT QUIT")

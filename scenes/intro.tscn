@@ -299,7 +299,8 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.5
 anchor_right = 1.0
-offset_right = 12096.0
+offset_left = -576.0
+offset_right = 2880.0
 offset_bottom = 648.0
 texture = ExtResource("1_35f52")
 stretch_mode = 1
@@ -341,6 +342,7 @@ position = Vector2(571, 540)
 scale = Vector2(6, 6)
 sprite_frames = SubResource("SpriteFrames_lxadx")
 animation = &"walk"
+frame = 2
 
 [node name="WaitBeforeStartingScreenShake" type="Timer" parent="."]
 wait_time = 0.5
@@ -359,7 +361,11 @@ layout_mode = 0
 offset_right = 1152.0
 color = Color(0, 0, 0, 1)
 
+[node name="Footsteps" type="Timer" parent="."]
+wait_time = 0.5
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="timeout" from="WaitBeforeStartingScreenShake" to="." method="_on_timer_1_timeout"]
 [connection signal="timeout" from="WaitBeforeEndingScreenShake" to="." method="_on_timer_2_timeout"]
 [connection signal="timeout" from="WaitBeforeChangingScenes" to="." method="_on_timer_3_timeout"]
+[connection signal="timeout" from="Footsteps" to="." method="_on_footsteps_timeout"]

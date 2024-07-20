@@ -367,7 +367,6 @@ sprite_frames = SubResource("SpriteFrames_b7o0l")
 autoplay = "default"
 
 [node name="Buttons" type="HBoxContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -382,8 +381,8 @@ alignment = 1
 custom_minimum_size = Vector2(128, 48)
 layout_mode = 2
 texture_normal = ExtResource("1_hj8w3")
-texture_pressed = ExtResource("2_ey0mg")
-texture_hover = ExtResource("2_bsdy0")
+texture_pressed = ExtResource("2_bsdy0")
+texture_hover = ExtResource("2_ey0mg")
 stretch_mode = 0
 
 [node name="Label" type="Label" parent="Buttons/Play"]
@@ -442,10 +441,7 @@ autoplay = "rotating"
 wait_time = 0.5
 one_shot = true
 
-[node name="WaitBeforeChangingScenes" type="Timer" parent="."]
-one_shot = true
-
+[connection signal="mouse_entered" from="Buttons/Play" to="." method="_on_play_mouse_entered"]
 [connection signal="pressed" from="Buttons/Play" to="." method="_on_play_pressed"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="WaitBeforeButtonsAppear" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="WaitBeforeChangingScenes" to="." method="_on_timer_2_timeout"]

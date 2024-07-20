@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bm5tl1lsjhe5e"]
+[gd_scene load_steps=10 format=3 uid="uid://bm5tl1lsjhe5e"]
 
-[ext_resource type="PackedScene" uid="uid://b10vqxmu8tum1" path="res://scenes/intro.tscn" id="2_gqqnx"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_hkwxl"]
+[ext_resource type="AudioStream" uid="uid://dek4todwo4gd3" path="res://assets/falling_menu.wav" id="3_bkmbu"]
+[ext_resource type="AudioStream" uid="uid://yfn3l678e4q" path="res://assets/de_text.wav" id="4_l5ysg"]
+[ext_resource type="AudioStream" uid="uid://dame7y0sj87bn" path="res://assets/ui_hover.wav" id="5_fke5o"]
+[ext_resource type="AudioStream" uid="uid://cp0q7bemppkt1" path="res://assets/ui_confirm.wav" id="6_i0ajv"]
+[ext_resource type="AudioStream" uid="uid://cl3v34ut1qidj" path="res://assets/earthquake.wav" id="7_lku3b"]
+[ext_resource type="AudioStream" uid="uid://bn3dku7brfi5t" path="res://assets/scene_transistion.wav" id="8_7yfnj"]
+[ext_resource type="AudioStream" uid="uid://c70cwxiq6vgnk" path="res://assets/footstep.wav" id="8_y4ry1"]
+[ext_resource type="PackedScene" uid="uid://cd5c38g4t8826" path="res://scenes/level_1.tscn" id="9_xg8xc"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -9,6 +17,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_hkwxl")
 
-[node name="Intro" parent="." instance=ExtResource("2_gqqnx")]
-layout_mode = 1
+[node name="Falling" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bkmbu")
+volume_db = -80.0
+autoplay = true
+
+[node name="TextFall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_l5ysg")
+
+[node name="UI_hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fke5o")
+volume_db = -17.783
+
+[node name="UI_confirm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_i0ajv")
+
+[node name="SceneTransition" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_7yfnj")
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_y4ry1")
+
+[node name="ScreenShake" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_lku3b")
+
+[node name="Break" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_l5ysg")
+volume_db = 10.0
+pitch_scale = 0.25
+
+[node name="Level 1" parent="." instance=ExtResource("9_xg8xc")]

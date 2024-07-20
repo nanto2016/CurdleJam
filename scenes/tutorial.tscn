@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://b6tanbd036i7a"]
+[gd_scene load_steps=64 format=3 uid="uid://b6tanbd036i7a"]
 
 [ext_resource type="Script" path="res://scripts/tutorial.gd" id="1_pnqy8"]
 [ext_resource type="Texture2D" uid="uid://cp5odg0iwvy2n" path="res://assets/zero.png" id="2_mf7wc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ddcn36602mrb3" path="res://assets/three.png" id="5_vemmo"]
 [ext_resource type="Texture2D" uid="uid://c8nqi20a6ypr1" path="res://assets/five.png" id="6_ak1wc"]
 [ext_resource type="Texture2D" uid="uid://cniujfgvmtuf3" path="res://assets/six.png" id="7_nbs36"]
+[ext_resource type="Texture2D" uid="uid://cx0a2yvqy15kq" path="res://assets/itch_io.png" id="8_ribjf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ia3o4"]
 atlas = ExtResource("2_mf7wc")
@@ -401,6 +402,14 @@ animations = [{
 "loop": true,
 "name": &"6",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ribjf")
+}],
+"loop": true,
+"name": &"7",
+"speed": 5.0
 }]
 
 [node name="Tutorial" type="ColorRect"]
@@ -416,9 +425,8 @@ script = ExtResource("1_pnqy8")
 position = Vector2(576, 324)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xkdkd")
-animation = &"6"
+animation = &"7"
 autoplay = "0"
-frame_progress = 0.274692
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
@@ -472,4 +480,5 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 16
 text = "NEXT"
 
+[connection signal="mouse_entered" from="Next" to="." method="_on_next_mouse_entered"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]

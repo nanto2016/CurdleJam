@@ -83,6 +83,7 @@ func _physics_process(delta):
 			if in_air:
 				in_air = false
 				$AnimationPlayer.play("land")
+				sprite.position = Vector2.ZERO
 				landing = true
 				running = false
 			

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://ppxfd7ewagfx"]
+[gd_scene load_steps=60 format=3 uid="uid://ppxfd7ewagfx"]
 
 [ext_resource type="Texture2D" uid="uid://nnw2ge51hjly" path="res://assets/player idle.png" id="1_bsqqq"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_eh1xa"]
@@ -11,6 +11,9 @@
 [ext_resource type="Texture2D" uid="uid://jt4geoibvoww" path="res://assets/player wall slide.png" id="7_fpxfq"]
 [ext_resource type="Texture2D" uid="uid://bml1fs1tmbi02" path="res://assets/gems left.png" id="10_m03s1"]
 [ext_resource type="Texture2D" uid="uid://yyudxoihq7x2" path="res://assets/gems right.png" id="11_l55b1"]
+[ext_resource type="AudioStream" uid="uid://dv0shdxjblbvd" path="res://assets/jump.wav" id="12_3nnoe"]
+[ext_resource type="AudioStream" uid="uid://c70cwxiq6vgnk" path="res://assets/footstep.wav" id="12_otidn"]
+[ext_resource type="AudioStream" uid="uid://yfn3l678e4q" path="res://assets/de_text.wav" id="13_uwlci"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u8r68"]
 atlas = ExtResource("2_qbsht")
@@ -421,6 +424,21 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Jump")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.351181,
+"start_offset": 0.0,
+"stream": ExtResource("12_3nnoe")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_qa7kx"]
 resource_name = "land"
@@ -450,6 +468,21 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"land"]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Land")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.9661,
+"start_offset": 1.2204,
+"stream": ExtResource("13_uwlci")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_mfbfh"]
 resource_name = "ledge_grab_left"
@@ -584,6 +617,21 @@ tracks/1/keys = {
 "update": 1,
 "values": [&"run"]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Footsteps")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("12_otidn")
+}],
+"times": PackedFloat32Array(0.0667)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8l58h"]
 _data = {
@@ -620,7 +668,7 @@ gem_weight = 1.9
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_er3ws")
-animation = &"fall"
+animation = &"land"
 offset = Vector2(0, -1.5)
 flip_h = true
 
@@ -692,6 +740,15 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 [node name="Pickup range" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+
+[node name="Land" type="AudioStreamPlayer" parent="."]
+volume_db = 10.196
+pitch_scale = 4.0
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+volume_db = -12.236
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="timeout" from="Pickup range" to="." method="_on_pickup_range_timeout"]

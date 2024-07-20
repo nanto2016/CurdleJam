@@ -40,6 +40,7 @@ func _ready():
 
 func _on_next_pressed():
 	anim += 1
+	$"../UI_confirm".play()
 	if anim == text.size():
 		get_parent().add_child(level_1.instantiate())
 		queue_free()
@@ -47,3 +48,7 @@ func _on_next_pressed():
 	$CenterContainer/Text.text = text[anim]
 	$Instructions.animation = StringName(var_to_str(anim))
 	$Instructions.play()
+
+
+func _on_next_mouse_entered():
+	$"../UI_hover".play()

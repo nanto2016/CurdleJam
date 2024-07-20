@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://vuo7ambiskv3"]
+[gd_scene load_steps=8 format=3 uid="uid://vuo7ambiskv3"]
 
 [ext_resource type="Script" path="res://scripts/lava.gd" id="1_j44wj"]
+[ext_resource type="AudioStream" uid="uid://c2313rus522gp" path="res://assets/lava_ambience.wav" id="2_exkt4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6yfd"]
 size = Vector2(1152, 648)
@@ -45,5 +46,11 @@ shape = SubResource("RectangleShape2D_g6yfd")
 texture_repeat = 2
 material = SubResource("ShaderMaterial_ehwq6")
 texture = SubResource("NoiseTexture2D_0u0gt")
+
+[node name="Ambiance" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(0, -324)
+stream = ExtResource("2_exkt4")
+autoplay = true
+attenuation = 6.9644
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

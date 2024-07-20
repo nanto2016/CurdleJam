@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5v02sjyiyg30"
+path="res://.godot/imported/Close Call.mp3-87e6b69293569a5824866b4507a12e86.mp3str"
+
+[deps]
+
+source_file="res://assets/Close Call.mp3"
+dest_files=["res://.godot/imported/Close Call.mp3-87e6b69293569a5824866b4507a12e86.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

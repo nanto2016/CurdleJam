@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bm5tl1lsjhe5e"]
+[gd_scene load_steps=13 format=3 uid="uid://bm5tl1lsjhe5e"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_hkwxl"]
 [ext_resource type="AudioStream" uid="uid://dek4todwo4gd3" path="res://assets/falling_menu.wav" id="3_bkmbu"]
@@ -8,7 +8,10 @@
 [ext_resource type="AudioStream" uid="uid://cl3v34ut1qidj" path="res://assets/earthquake.wav" id="7_lku3b"]
 [ext_resource type="AudioStream" uid="uid://bn3dku7brfi5t" path="res://assets/scene_transistion.wav" id="8_7yfnj"]
 [ext_resource type="AudioStream" uid="uid://c70cwxiq6vgnk" path="res://assets/footstep.wav" id="8_y4ry1"]
-[ext_resource type="PackedScene" uid="uid://cd5c38g4t8826" path="res://scenes/level_1.tscn" id="9_xg8xc"]
+[ext_resource type="AudioStream" uid="uid://c4lb5ioputlfh" path="res://assets/outside ambience.mp3" id="10_71era"]
+[ext_resource type="AudioStream" uid="uid://5v02sjyiyg30" path="res://assets/Close Call.mp3" id="10_oad3o"]
+[ext_resource type="AudioStream" uid="uid://d2qxuwnwdvdyb" path="res://assets/Not Even Close Call.mp3" id="11_6mmju"]
+[ext_resource type="PackedScene" uid="uid://cd5c38g4t8826" path="res://scenes/level_1.tscn" id="12_xh7wh"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -48,4 +51,16 @@ stream = ExtResource("4_l5ysg")
 volume_db = 10.0
 pitch_scale = 0.25
 
-[node name="Level 1" parent="." instance=ExtResource("9_xg8xc")]
+[node name="Close call" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_oad3o")
+volume_db = 24.0
+
+[node name="Not even close call" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_6mmju")
+volume_db = 24.0
+
+[node name="Outside" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_71era")
+autoplay = true
+
+[node name="Level 1" parent="." instance=ExtResource("12_xh7wh")]

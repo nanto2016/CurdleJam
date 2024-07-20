@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d2qxuwnwdvdyb"
+path="res://.godot/imported/Not Even Close Call.mp3-adb4862019b765242b4b35b8d1367eed.mp3str"
+
+[deps]
+
+source_file="res://assets/Not Even Close Call.mp3"
+dest_files=["res://.godot/imported/Not Even Close Call.mp3-adb4862019b765242b4b35b8d1367eed.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

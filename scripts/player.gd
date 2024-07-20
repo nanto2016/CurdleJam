@@ -32,6 +32,7 @@ extends CharacterBody2D
 @onready var ledge_grab_ray: RayCast2D = $"Ledge grab"
 
 var gem: PackedScene = preload("res://scenes/gem.tscn")
+var you_won: PackedScene = preload("res://scenes/you_won.tscn")
 
 var in_air: bool = false
 var landing: bool = false
@@ -58,11 +59,11 @@ var gem_colors: Array[int] = [-1, -1, -1, -1, -1, -1]
 func _ready():
 	gems = 0
 	sprite.stop()
-	push_warning("The indicator showing the number of gems doesn't match the color of the gems picked up")
 
 
 func _physics_process(delta):
 	if not ledge_grabbing:
+		sprite.position = Vector2.ZERO
 		var direction: float = -int(Input.is_action_pressed("left")) + int(Input.is_action_pressed("right"))
 		var just_jumped: bool = true if Input.is_action_just_pressed("jump") else false
 		
@@ -83,7 +84,6 @@ func _physics_process(delta):
 			if in_air:
 				in_air = false
 				$AnimationPlayer.play("land")
-				sprite.position = Vector2.ZERO
 				landing = true
 				running = false
 			
@@ -291,3 +291,21 @@ func _draw():
 
 func _on_pickup_range_timeout():
 	show_range = false
+
+
+func win():
+	$WaitBeforeWin.start()
+	var tween: Tween = create_tween()
+	tween.tween_property(Engine, "time_scale", 0.25, 1)
+	if global_position.distance_to(get_node("../Lava").global_position) > 250:
+		$"/root/Game/Not even close call".play()
+	else:
+		$"/root/Game/Close call".play()
+
+
+func _on_wait_before_win_timeout():
+	var endScreen = you_won.instantiate()
+	get_parent().get_parent().add_child(endScreen)
+	endScreen.gems = gems
+	Engine.time_scale = 1.0
+	get_parent().queue_free()

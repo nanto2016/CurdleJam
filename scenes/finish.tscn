@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bchayjq7xabx4"]
+
+[ext_resource type="Script" path="res://scripts/finish.gd" id="1_x0klu"]
+[ext_resource type="Texture2D" uid="uid://bdijrvtf2556l" path="res://assets/finish.png" id="2_8rubi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpdfg"]
+size = Vector2(1152, 20)
+
+[node name="Finish" type="Area2D"]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("1_x0klu")
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_xpdfg")
+
+[node name="Texture" type="TextureRect" parent="."]
+offset_left = -576.0
+offset_top = -10.0
+offset_right = 576.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8rubi")
+stretch_mode = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

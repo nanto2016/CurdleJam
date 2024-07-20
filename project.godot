@@ -28,6 +28,10 @@ mouse_cursor/custom_image_hotspot=Vector2(4, 4)
 
 project/assembly_name="CurdleJam"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/Ysa/OneDrive/Documents/Godot (Programmation Antoine)/CurdleJam/playthrough.avi"
+
 [gui]
 
 theme/custom_font="res://assets/full Pack 2025.ttf"
@@ -73,6 +77,7 @@ pickup={
 2d_physics/layer_2="Player"
 2d_physics/layer_3="Gems"
 2d_physics/layer_4="Lava"
+2d_physics/layer_5="finish"
 
 [rendering]
 

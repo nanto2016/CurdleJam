@@ -262,9 +262,9 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("7_b8nss")
 }],
-"loop": false,
+"loop": true,
 "name": &"ledge hang",
-"speed": 0.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -668,7 +668,7 @@ gem_weight = 1.9
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_er3ws")
-animation = &"land"
+animation = &"ledge hang"
 offset = Vector2(0, -1.5)
 flip_h = true
 
@@ -750,5 +750,11 @@ pitch_scale = 4.0
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 volume_db = -12.236
 
+[node name="Ears" type="AudioListener2D" parent="."]
+
+[node name="WaitBeforeWin" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]
 [connection signal="timeout" from="Pickup range" to="." method="_on_pickup_range_timeout"]
+[connection signal="timeout" from="WaitBeforeWin" to="." method="_on_wait_before_win_timeout"]

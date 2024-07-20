@@ -19,8 +19,3 @@ func update_color():
 	if color == -1:
 		color = randi_range(0, 5)
 	$Sprite.play(StringName("gem" + var_to_str(color)))
-
-
-func _input(event):
-	if event.is_action_pressed("pickup"):
-		print(position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://b6tanbd036i7a"]
+[gd_scene load_steps=73 format=3 uid="uid://b6tanbd036i7a"]
 
 [ext_resource type="Script" path="res://scripts/tutorial.gd" id="1_pnqy8"]
 [ext_resource type="Texture2D" uid="uid://cp5odg0iwvy2n" path="res://assets/zero.png" id="2_mf7wc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://ddcn36602mrb3" path="res://assets/three.png" id="5_vemmo"]
 [ext_resource type="Texture2D" uid="uid://c8nqi20a6ypr1" path="res://assets/five.png" id="6_ak1wc"]
 [ext_resource type="Texture2D" uid="uid://cniujfgvmtuf3" path="res://assets/six.png" id="7_nbs36"]
+[ext_resource type="Texture2D" uid="uid://f8bs0r750hwf" path="res://assets/seven.png" id="8_fypb3"]
 [ext_resource type="Texture2D" uid="uid://cx0a2yvqy15kq" path="res://assets/itch_io.png" id="8_ribjf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ia3o4"]
@@ -213,6 +214,38 @@ region = Rect2(32, 96, 32, 32)
 atlas = ExtResource("7_nbs36")
 region = Rect2(64, 96, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng0ib"]
+atlas = ExtResource("8_fypb3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1iur7"]
+atlas = ExtResource("8_fypb3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_has6u"]
+atlas = ExtResource("8_fypb3")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_26pxv"]
+atlas = ExtResource("8_fypb3")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g7hfc"]
+atlas = ExtResource("8_fypb3")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irdk3"]
+atlas = ExtResource("8_fypb3")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulo5r"]
+atlas = ExtResource("8_fypb3")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1kmn"]
+atlas = ExtResource("8_fypb3")
+region = Rect2(32, 64, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_xkdkd"]
 animations = [{
 "frames": [{
@@ -405,10 +438,39 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_ribjf")
+"texture": SubResource("AtlasTexture_ng0ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1iur7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_has6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_26pxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g7hfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irdk3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulo5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1kmn")
 }],
 "loop": true,
 "name": &"7",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ribjf")
+}],
+"loop": true,
+"name": &"8",
 "speed": 5.0
 }]
 

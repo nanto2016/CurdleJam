@@ -10,10 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://byxjmm21pyj6q" path="res://assets/Lines - Vertical - light dirt.png" id="7_x43ku"]
 [ext_resource type="Texture2D" uid="uid://b8a3vsh64vrtt" path="res://assets/Lines - Vertical - packed soil.png" id="8_5f4g7"]
 [ext_resource type="Texture2D" uid="uid://dbu3v348bv8g2" path="res://assets/Lines - Vertical - rock and stone.png" id="9_b28hs"]
-[ext_resource type="PackedScene" uid="uid://vuo7ambiskv3" path="res://scenes/lava.tscn" id="11_ptj6d"]
+[ext_resource type="PackedScene" uid="uid://bsax1y8axsgg" path="res://scenes/lava.tscn" id="11_ptj6d"]
 [ext_resource type="PackedScene" uid="uid://dqqu76b3x61sv" path="res://scenes/gem.tscn" id="12_0744o"]
 [ext_resource type="AudioStream" uid="uid://ddu5ihw24inyy" path="res://assets/saŵmkä.wav" id="13_hpp1t"]
-[ext_resource type="PackedScene" uid="uid://bchayjq7xabx4" path="res://scenes/finish.tscn" id="14_fkeg0"]
+[ext_resource type="PackedScene" path="res://scenes/finish.tscn" id="14_fkeg0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1wvu0"]
 texture = ExtResource("1_yiwn4")

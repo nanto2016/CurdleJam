@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://vuo7ambiskv3"]
+[gd_scene load_steps=8 format=3 uid="uid://bsax1y8axsgg"]
 
 [ext_resource type="Script" path="res://scripts/lava.gd" id="1_j44wj"]
 [ext_resource type="AudioStream" uid="uid://c2313rus522gp" path="res://assets/lava_ambience.wav" id="2_exkt4"]

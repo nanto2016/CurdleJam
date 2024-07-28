@@ -9,7 +9,9 @@ func _on_body_entered(body):
 	if body is RigidBody2D:
 		body.queue_free()
 	elif body.name == "Player":
-		get_node("/root/Game").add_child(level_1.instantiate())
+		var level: Node2D = level_1.instantiate()
+		get_node("/root/Game").call_deferred("add_child", level)
+		level.name = "Level 1"
 		body.get_parent().queue_free()
 
 

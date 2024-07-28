@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://c4lb5ioputlfh" path="res://assets/outside ambience.mp3" id="10_71era"]
 [ext_resource type="AudioStream" uid="uid://5v02sjyiyg30" path="res://assets/Close Call.mp3" id="10_oad3o"]
 [ext_resource type="AudioStream" uid="uid://d2qxuwnwdvdyb" path="res://assets/Not Even Close Call.mp3" id="11_6mmju"]
-[ext_resource type="PackedScene" uid="uid://cd5c38g4t8826" path="res://scenes/level_1.tscn" id="12_xh7wh"]
+[ext_resource type="PackedScene" uid="uid://b10vqxmu8tum1" path="res://scenes/intro.tscn" id="12_lvy7h"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -63,4 +63,5 @@ volume_db = 24.0
 stream = ExtResource("10_71era")
 autoplay = true
 
-[node name="Level 1" parent="." instance=ExtResource("12_xh7wh")]
+[node name="Intro" parent="." instance=ExtResource("12_lvy7h")]
+layout_mode = 1
